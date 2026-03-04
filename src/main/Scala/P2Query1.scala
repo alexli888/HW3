@@ -25,13 +25,14 @@ object P2Query1 {
       """.stripMargin)
 
     // Write result
-    t1.write
+    t1.coalesce(1)
+      .write
       .option("header", "true")
       .mode("overwrite")
-      .csv("target/generated-sources/T1")
+      .csv("data/T1")
 
     // show count
-    println(s"Records written to target/generated-sources/T1: ${t1.count()}")
+    println(s"Records written to data/T1: ${t1.count()}")
 
     spark.stop()
   }
